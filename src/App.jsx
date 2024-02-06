@@ -38,13 +38,15 @@ function App() {
 						id: 1,
 						name: "Product 1",
 						description: "Description 1",
-						image: "image1.jpg",
+						image:
+							"https://awsimages.detik.net.id/community/media/visual/2023/11/03/semangka-2_169.jpeg?w=1200",
 					},
 					{
 						id: 2,
 						name: "Product 2",
 						description: "Description 2",
-						image: "image2.jpg",
+						image:
+							"https://res.cloudinary.com/dk0z4ums3/image/upload/v1682752500/attached_image/8-manfaat-buah-kelapa-untuk-kesehatan-yang-jarang-diketahui.jpg",
 					},
 					// Add more products as needed
 				];
@@ -88,10 +90,15 @@ function App() {
 	const mainButton = window.Telegram.WebApp.MainButton;
 	mainButton.text = "Save Preferences";
 	mainButton.enable();
-	mainButton.show();
 	mainButton.onClick(function () {
 		window.Telegram.WebApp.sendData(orderStates);
 	});
+
+	if (Object.values(orderStates).length === 0) {
+		mainButton.hide();
+	} else {
+		mainButton.show();
+	}
 
 	const sendOrderData = async () => {
 		try {
@@ -112,6 +119,10 @@ function App() {
 
 	return (
 		<Container>
+			<div className="mt-2">
+				<h1>Test React for Telegram</h1>
+				<hr />
+			</div>
 			{loading ? (
 				<span>Loading...</span>
 			) : (
